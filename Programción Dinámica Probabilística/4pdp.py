@@ -68,7 +68,7 @@ def step(n, last_step, cache):
     for s in sn: # Calcula los valores de la tabla
         fn_sn = []
         for i in range(0, 4):
-            if s - cost(n, i) >= sn_op[0]: # Si alcanza el dinero para comprar i componentes tipo n
+            if s - cost(n, i) >= sn_op[0]: # Si alcanzan los dias
                 j = 0
                 for j, s_last in enumerate(sn_op):  # n -- n + 1
                     if s - cost(n, i) == s_last:
@@ -87,7 +87,7 @@ def step(n, last_step, cache):
         value = 10000
         for i, v in enumerate(fs):
             if v < value:
-                x_op = i + 1
+                x_op = i
                 value = v
         xop_current.append(x_op)
         values.append(value)
@@ -109,9 +109,8 @@ def get_sol(sol):
     Returns: None
     '''
 
-    budget = 1000
+    budget = 4
     count = []
-    spent = []
 
     last_step = sol[-1]
     __, prob, __ = last_step
@@ -123,21 +122,20 @@ def get_sol(sol):
             if sn[i] == budget:
                 count.append(xvals[i])
                 coste = cost(j + 1, xvals[i])
-                spent.append(coste)
                 budget -= coste
 
     nombres = ["Poda", "Raleo", "Cosecha"]
 
-    print("La solución es:")
+    print("La asignación optima de dias es:")
     for i in range(len(count)):
-        print("Del componente {} se colocan {} unidades en paralelo, gastando ${}".format(nombres[i], count[i], spent[i]))
+        print(f"Dedicar {count[i]} dia(s) a la {nombres[i]}")
 
     print("\n")
 
     for i in range(len(count)):
         print("x{}: {}. ".format(i + 1, count[i]))
 
-    print("\nLa probabilidad de que el sistema funcione es de: {}%".format(prob[0] * 100))
+    print("\nLa probabilidad de ser despedido es de: {}%".format(prob[0] * 100))
 
 
 def main():
