@@ -22,11 +22,17 @@ class Aplicacion(ttk.Frame):
         self.txtIteraciones.place(x = 175, y = 20)
 
 
-        self.anterior = ttk.Label(self, text = f"Valor de la iteración anterior:", font = ("", "14"))
+        self.anterior = ttk.Label(self, text = f"Restricción:", font = ("", "14"))
         self.anterior.place(x = 225, y = 20)
 
         self.txtAnterior = ttk.Entry(self, width = 10,font = ("","14"))
         self.txtAnterior.place(x = 470, y = 20)
+
+        self.dec = ttk.Label(self, text=f"1 para maximizar, 2 para minizar:", font=("", "14"))
+        self.dec.place(x=20, y=60)
+
+        self.txtDec = ttk.Entry(self, width=2, font=("", "14"))
+        self.txtDec.place(x=300, y=60)
 
         self.respuesta = ScrolledText(self, width = 70, height = 10)
         self.respuesta.place(x = 20, y = 120)
