@@ -6,6 +6,7 @@ class pdp_gen():
         self.sn = sn
         self.xn = xn
         self.type = type  # 1 para max 2 para min
+        self.res = ""
 
     def prob(self, n, xn):
         '''
@@ -143,9 +144,9 @@ class pdp_gen():
                     budget -= coste
 
         for i in range(len(count)):
-            print("x{}: {}. ".format(i + 1, count[i]))
+            self.res += "x{}: {}. ".format(i + 1, count[i]) + "\n" 
 
-        print("\nLa probabilidad es de: {}%".format(prob[0] * 100))
+        self.res += "\nLa probabilidad es de: {}%".format(prob[0] * 100)
 
     def run(self, n, sn_last, v_last, x_last, budget):
         '''
