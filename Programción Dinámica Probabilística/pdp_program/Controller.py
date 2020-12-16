@@ -34,7 +34,7 @@ class Controlador():
 
         #typev = 0
 
-        sn_last = [0, 1, 2, 3]
+        #sn_last = [0, 1, 2, 3]
         #budget = 4
         #n = 3
         #'''
@@ -64,11 +64,16 @@ class Controlador():
 
         #n = 4
 
-        sn_last = [0, 100, 200, 300, 400]
+        #sn_last = [0, 100, 200, 300, 400]
         '''
 
         v_last = []
         x_last = []
+
+        sn_last = [va - sn[-2][0] for va in sn[-2]]
+        while len(sn_last) > n + 1:
+            sn_last.pop()
+        print(sn_last)
 
         for k in range(n + 1):
             v_last.append(1)
