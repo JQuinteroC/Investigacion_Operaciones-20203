@@ -93,21 +93,17 @@ class pdp_gen():
         for (s, fs) in fn:  # Elije los valores optimos para cada valor de s
             x_op = 0
             if self.type == 1:
-                #print('entra a max')
                 value = -10000
                 for i, v in zip(self.xn, fs):
                     if v > value:
                         x_op = i
                         value = v
-                        #print(x_op, value)
             else:
-                #print('entra a min')
                 value = 10000
                 for i, v in zip(self.xn, fs):
                     if v < value:
                         x_op = i
                         value = v
-                        #print(x_op, value)
             xop_current.append(x_op)
             values.append(value)
 
@@ -139,7 +135,6 @@ class pdp_gen():
             for i in range(len(sn)):
                 if sn[i] == budget:
                     count.append(xvals[i])
-                    #print(j + 1, xvals[i])
                     coste = self.cost(j + 1, xvals[i])
                     budget -= coste
 
