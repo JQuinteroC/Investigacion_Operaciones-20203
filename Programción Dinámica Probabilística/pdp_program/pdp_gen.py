@@ -9,66 +9,61 @@ class pdp_gen():
         self.res = ""
 
     def prob(self, n, xn):
-        '''
-
+        """
         Retorna la probabilidad
+
         Args:
-            n: número de la etapa
-            xn: variable xn
+            n (int): Número de la etapa
+            xn (int): Variable xn
 
-        Returns: probabilidad de xn para n
-
-        '''
-
+        Returns:
+            int: probabilidad de xn para n
+        """
         n -= 1
-        #xn -= 1
 
         return self.probs[n][xn]
 
     def cost(self, n, xn):
-        '''
-
+        """
         Retorna el costo para xn de n
+
         Args:
-            n: número de la etapa
-            xn: variable xn
+            n (int): Número de la etapa
+            xn (int): variable xn
 
-        Returns: costo de xn para n
-
-        '''
-
+        Returns:
+            int: Costo de xn para n
+        """
         n -= 1
-        #xn -= 1
 
         return self.costs[n][xn]
 
     def step_prices(self, n):
-        '''
-
+        """
         Retorna sn para la etapa n
+
         Args:
-            n: número de la etapa
+            n (int): Número de la etapa
 
-        Returns: sn
-
-        '''
-
+        Returns:
+            int: sn
+        """
         n -= 1
 
         return self.sn[n]
 
     def step(self, n, last_step, cache):
-        '''
+        """
+        Realiza cada una de las operación correspondientes a la iteración dada
 
         Args:
-            n: número de la etapa
-            last_step: soluciones optimas para la etapa anterior
-            cache: resultados de todos los niveles
+            n (int): Número de la etapa
+            last_step (list[int]): Soluciones optimas para la etapa anterior
+            cache (list[list[int]]): Resultados de todos los niveles
 
-        Returns: tupla que contiene la solución optima
-
-        '''
-
+        Returns:
+            list: Contiene la solución optima
+        """
         fn = []
         sn_op, fn_last, xn_op = last_step
 
@@ -116,14 +111,13 @@ class pdp_gen():
             return cache
 
     def get_sol(self, sol, budget):
-        '''
+        """
         Obtiene la solución más optima y la muestra
-        Args:
-            sol: cache que contiene las soluciones optimas de cada nivel
-            budget: máximo disponible
-        Returns: None
-        '''
 
+        Args:
+            sol (list[int]): Cache que contiene las soluciones optimas de cada nivel
+            budget (int): máximo disponible
+        """
         count = []
 
         last_step = sol[-1]
@@ -144,15 +138,16 @@ class pdp_gen():
         self.res += "\nLa probabilidad es de: {}%".format(prob[0] * 100)
 
     def run(self, n, sn_last, v_last, x_last, budget):
-        '''
+        """
         Ejecuta el calculo
-        Args:
-            n: cantidad de etapas a ejecutar
-            sn_last: Sn de la etapa posterior a la final
-            v_last: Valores de la etapa posterior a la final
 
-        Returns: None
-        '''
+        Args:
+            n (int): Cantidad de etapas a ejecutar
+            sn_last (list[int]): Valores de la etapa de la etapa posterior a la final
+            v_last (list[int]): Valores de las vairables de la etapa posterior a la final
+            x_last (list[int]): Valores de la variable
+            budget (int): Valor máximo permitido
+        """
         last_step = (sn_last, v_last, x_last)
         sol = self.step(n, last_step, [])
 
