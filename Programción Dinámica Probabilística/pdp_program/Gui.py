@@ -22,8 +22,8 @@ class Aplicacion(ttk.Frame):
         self.txtIteraciones.place(x = 175, y = 20)
 
         ## Maximizar o minimizar
-        self.dec = ttk.Label(self, text="1 para maximizar, 2 para minizar:", font=("", "14"))
-        self.dec.place(x=280, y=20)
+        self.dec = ttk.Label(self, text="1 para maximizar, 2 para minimizar:", font=("", "14"))
+        self.dec.place(x=260, y=20)
         self.txtDec = ttk.Entry(self, width=2, font=("", "14"))
         self.txtDec.place(x=560, y=20)
 
