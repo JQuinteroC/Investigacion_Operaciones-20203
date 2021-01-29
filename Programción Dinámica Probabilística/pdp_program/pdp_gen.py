@@ -1,3 +1,6 @@
+from tabulate import tabulate
+
+
 class pdp_gen():
 
     def __init__(self, probs, costs, sn, xn, type):
@@ -72,7 +75,8 @@ class pdp_gen():
         for s in sn:  # Calcula los valores de la tabla
             fn_sn = []
             for i in self.xn:
-                if s - self.cost(n, i) >= sn_op[0]:  # Si alcanza el dinero para comprar i componentes tipo n
+                # Si alcanza el dinero para comprar i componentes tipo n
+                if s - self.cost(n, i) >= sn_op[0]:
                     j = 0
                     for j, s_last in enumerate(sn_op):  # n -- n + 1
                         if s - self.cost(n, i) == s_last:
@@ -119,6 +123,7 @@ class pdp_gen():
             budget (int): máximo disponible
         """
         count = []
+        index_soluciones = []
 
         last_step = sol[-1]
         __, prob, __ = last_step
@@ -130,10 +135,26 @@ class pdp_gen():
                 if sn[i] == budget:
                     count.append(xvals[i])
                     coste = self.cost(j + 1, xvals[i])
+                    index_soluciones.append(i)
                     budget -= coste
 
+        index_soluciones = reversed(index_soluciones)
+
+        for j, step in enumerate(sol):
+            solucion = {}
+            sn, values, xvals = step
+
+            self.res += f"\nEtapa {len(sol)-j}\n"
+            solucion[f'S{len(sol)-j}'] = sn
+            solucion[f'F{len(sol)-j}*(S{len(sol)-j})'] = values
+            solucion[f'X{len(sol)-j}*'] = xvals
+
+            self.res += tabulate(solucion, headers='keys',
+                                 tablefmt='fancy_grid', stralign='center')
+            self.res += "\n"
+
         for i in range(len(count)):
-            self.res += "x{}: {}. ".format(i + 1, count[i]) + "\n" 
+            self.res += "x{}: {}. ".format(i + 1, count[i]) + "\n"
 
         self.res += "\nLa probabilidad es de: {}%".format(prob[0] * 100)
 
